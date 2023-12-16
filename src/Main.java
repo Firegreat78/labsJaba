@@ -1,62 +1,33 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.Instant;
+import java.util.*;
 
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws CloneNotSupportedException {
+        // перегрузка метода баз. класса:
+        Player player1 = new Player("Firegreat", 100, new Vector2(1, 54));
+        Pistol p1 = new Pistol(new Vector2(1, 53));
+        Sword s1 = new Sword(new Vector2(1, 53));
+        player1.pickupWeapon(p1);
+        player1.pickupWeapon(s1);
+
+        // клонирование:
+        cloneTest();
+
+        // toString:
+        LongNumber num1 = new LongNumber(-6858423424434331243L);
+        LongNumber num2 = new LongNumber(32213);
+        System.out.println(num1 + "|" + num2);
+    }
+
+    public static void cloneTest() throws CloneNotSupportedException
     {
-
-        // Слишком длинное число
-        try
-        {
-            LongNumber a = new LongNumber("1".repeat(230), 1);
-        }
-
-        catch (IllegalArgumentException e) // перехват попытки создания числа из нечисловой строки
-        {
-            System.out.println("Non-numeric string exception: ");
-            System.out.println(e);
-        }
-
-        catch (ArithmeticException e) // перехват попытки создания слишком длинного числа
-        {
-            System.out.println("Too long number exception: ");
-            System.out.println(e);
-        }
-
-        // Попытка создания числа, с использованием нечисловой строки
-        try
-        {
-            LongNumber a = new LongNumber("-" + "1".repeat(230), 1);
-        }
-
-        catch (IllegalArgumentException e) // перехват попытки создания числа из нечисловой строки
-        {
-            System.out.println("Non-numeric string exception: ");
-            System.out.println(e);
-        }
-
-        catch (ArithmeticException e) // перехват попытки создания слишком длинного числа
-        {
-            System.out.println("Too long number exception: ");
-            System.out.println(e);
-        }
-
-        LongNumber[][] arr = new LongNumber[5][4];
-        try
-        {
-            arr[3][100] = new LongNumber(1234); // индекс за пределами
-        }
-        catch (Exception e)
-        {
-            System.out.println(e);
-        }
-        arr[3] = new LongNumber[443];
-        arr[3][100] = new LongNumber(12); // индекс не за пределами
-        arr[0][0] = arr[3][100].Negate(); // -12, OK
-        System.out.println("arr[0][0] = " + arr[0][0]);
-        System.out.println("arr[3][100] = " + arr[3][100]);
+        Player player = new Player("Fire", 100, new Vector2(0, 1));
+        Pistol pistol = new Pistol(new Vector2(0, 0));
+        Sword sword = new Sword(new Vector2(1, 1));
+        Pistol pistolClone = pistol.clone();
+        Sword swordClone = sword.shallowCopy();
+        player.pickupWeapon(pistolClone);
+        player.pickupWeapon(swordClone);
     }
 }

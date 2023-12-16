@@ -1,8 +1,9 @@
 import java.util.Objects;
 import java.lang.Math;
+//import java.lang.Comparable;
 import java.util.function.IntPredicate;
 
-public final class LongNumber
+public final class LongNumber implements Comparable<LongNumber>
 {
     private static final IntPredicate pr = character -> character >= '0' && character <= '9';
 
@@ -53,14 +54,14 @@ public final class LongNumber
     // 1 if this > other;
     // 0 if this == other;
     // -1 if this < other.
-    public int Compare(LongNumber other)
+    public int compare(LongNumber other) // interface implementation
     {
         return this.sign == other.sign ? (this.CompareAbs(other) * this.sign) : (this.sign > other.sign ? 1 : -1);
     }
 
     public int Compare(long other)
     {
-        return this.Compare(new LongNumber(other));
+        return this.compare(new LongNumber(other));
     }
 
     // Сравнение модулей двух чисел
