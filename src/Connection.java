@@ -18,7 +18,7 @@ public class Connection
         return 8000;
     }
 
-    protected Instant connection_time;
+    public Instant connection_time;
 
     protected String ipAddress;
 
